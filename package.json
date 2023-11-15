@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/andreasnonslid/clang-tidy-extension"
   },
-  "version": "1.2.0",
+  "version": "1.3.0",
   "engines": {
     "vscode": "^1.63.0"
   },
@@ -26,7 +26,7 @@
   "contributes": {
     "commands": [
       {
-        "command": "clang-tidy.run",
+        "command": "clang-tidy-on-active-file.run",
         "title": "Run clang-tidy"
       }
     ],
@@ -34,47 +34,47 @@
       "type": "object",
       "title": "Clang-Tidy Configuration",
       "properties": {
-        "clang-tidy.coreNumber": {
+        "clang-tidy-on-active-file.coreNumber": {
           "type": "integer",
           "default": -1,
           "description": "Maximum number of CPU cores to use for running Clang Tidy. Set to -1 to use half of the available cores."
         },
-        "clang-tidy.chunkSize": {
+        "clang-tidy-on-active-file.chunkSize": {
           "type": "integer",
           "default": -1,
           "description": "The size of each chunk for processing. Set to 0/-1 to always do full file analysis."
         },
-        "clang-tidy.displayInfoPopups": {
+        "clang-tidy-on-active-file.displayInfoPopups": {
           "type": "boolean",
           "default": true,
           "description": "Enable/disable popups info/warning/error."
         },
-        "clang-tidy.displayExtensionPopups": {
+        "clang-tidy-on-active-file.displayExtensionPopups": {
           "type": "boolean",
           "default": false,
           "description": "Enable/disable popups saying the current file is of the wrong type."
         },
-        "clang-tidy.autoRunOnSave": {
+        "clang-tidy-on-active-file.autoRunOnSave": {
           "type": "boolean",
           "default": false,
           "description": "Enable/disable Clang-Tidy auto-run on file save."
         },
-        "clang-tidy.extensions": {
+        "clang-tidy-on-active-file.extensions": {
           "type": "string",
           "default": "c cpp cxx h hpp",
           "description": "The extensions to run clang-tidy on. Seperate by spaces."
         },
-        "clang-tidy.scriptPath": {
+        "clang-tidy-on-active-file.scriptPath": {
           "type": "string",
           "default": "",
           "description": "Path to the port script. (include filename.extension)"
         },
-        "clang-tidy.configPath": {
+        "clang-tidy-on-active-file.configPath": {
           "type": "string",
           "default": "",
           "description": "Path to the Clang-Tidy configuration file. (include filename.extension)"
         },
-        "clang-tidy.optionalArgs": {
+        "clang-tidy-on-active-file.optionalArgs": {
           "type": "string",
           "default": "",
           "description": "Optional arguments for the script."
