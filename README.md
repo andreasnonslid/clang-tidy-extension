@@ -14,6 +14,7 @@ Features
 ## Requirements
 
 Clang Tidy Installation: Ensure Clang Tidy is installed on your system. Refer to the official Clang Tidy documentation for installation instructions.
+
 C/C++ Project Setup: Your C/C++ project should be set up with the necessary build configurations. 'compiled_commands.json' should be in the working directory in a build subdirectory.
 
 Example;
@@ -36,8 +37,9 @@ This extension contributes the following settings:
 
 ## Known Issues
 
-    Limited support for very large files: Files beyond a certain size may not be processed optimally. Too many generated warnings will simply stop scanning for more. Splitting the file into many chunks removes context for analysis of parts of the file.
-    Dependency on project build configurations: The extension requires correct setup of build configurations for accurate analysis.
+Limited support for very large files: Files beyond a certain size may not be processed optimally. Too many generated warnings will simply stop scanning for more. Splitting the file into many chunks removes context for analysis of parts of the file.
+
+Dependency on project build configurations: The extension requires correct setup of build configurations for accurate analysis.
 
 ##Release Notes
 

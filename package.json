@@ -1,6 +1,6 @@
 {
-  "name": "clang-tidy",
-  "displayName": "Clang-Tidy",
+  "name": "clang-tidy-on-active-file",
+  "displayName": "Clang-Tidy-On-Active-File",
   "description": "Run clang-tidy and display results within VSCode.",
   "publisher": "AndreasNonslidHvardsen",
   "author": {
