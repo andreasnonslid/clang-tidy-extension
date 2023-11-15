@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/dev/testing/clang-tidy/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe   -g -std=c++11 -o CMakeFiles\\main.x.dir\\main.cpp.obj -c C:\\dev\\testing\\clang-tidy\\main.cpp",
+  "file": "C:/dev/testing/clang-tidy/main.cpp",
+  "output": "CMakeFiles/main.x.dir/main.cpp.obj"
+}
+]
