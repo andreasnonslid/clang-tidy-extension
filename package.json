@@ -1,0 +1,108 @@
+{
+  "name": "clang-tidy",
+  "displayName": "Clang-Tidy",
+  "description": "Run clang-tidy and display results within VSCode.",
+  "publisher": "AndreasNonslidHvardsen",
+  "author": {
+    "email": "andreas.havardsen@autostoresystem.com",
+    "name": "Andreas Nonslid Håvardsen",
+    "url": "https://github.com/andreasnonslid/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreasnonslid/clang-tidy-extension"
+  },
+  "version": "1.1.0",
+  "engines": {
+    "vscode": "^1.63.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "clang-tidy.run",
+        "title": "Run clang-tidy"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Clang-Tidy Configuration",
+      "properties": {
+        "clang-tidy.coreNumber": {
+          "type": "integer",
+          "default": -1,
+          "description": "Maximum number of CPU cores to use for running Clang Tidy. Set to -1 to use half of the available cores."
+        },
+        "clang-tidy.chunkSize": {
+          "type": "integer",
+          "default": -1,
+          "description": "The size of each chunk for processing. Set to 0/-1 to always do full file analysis."
+        },
+        "clang-tidy.displayInfoPopups": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable popups info/warning/error."
+        },
+        "clang-tidy.displayExtensionPopups": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/disable popups saying the current file is of the wrong type."
+        },
+        "clang-tidy.autoRunOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable/disable Clang-Tidy auto-run on file save."
+        },
+        "clang-tidy.extensions": {
+          "type": "string",
+          "default": "c cpp cxx h hpp",
+          "description": "The extensions to run clang-tidy on. Seperate by spaces."
+        },
+        "clang-tidy.scriptPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the port script. (include filename.extension)"
+        },
+        "clang-tidy.configPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the Clang-Tidy configuration file. (include filename.extension)"
+        },
+        "clang-tidy.optionalArgs": {
+          "type": "string",
+          "default": "",
+          "description": "Optional arguments for the script."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test-compile": "tsc -p ./tsconfig.json",
+    "test": "npm run test-compile && node ./out/test/runTest.js",
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.201",
+    "@types/mocha": "^10.0.4",
+    "@types/node": "^12.20.55",
+    "@types/vscode": "^1.63.0",
+    "@vscode/test-electron": "^2.3.6",
+    "eslint": "^7.0.0",
+    "glob": "^10.3.10",
+    "mocha": "^10.2.0",
+    "typescript": "^4.0.0",
+    "vscode-test": "^1.0.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "promisify-child-process": "^4.1.0"
+  }
+}
