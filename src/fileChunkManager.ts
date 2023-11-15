@@ -45,7 +45,7 @@ export async function deleteChunkFiles(chunkFilePaths: string[]): Promise<void> 
 
 export async function prepareAndCreateChunkFiles(filePath: string): Promise<string[]> {
     const fileContents = await readFileAsync(filePath);
-    const chunkSize = vscode.workspace.getConfiguration('clang-tidy').get('chunkSize') as number;
+    const chunkSize = vscode.workspace.getConfiguration('clang-tidy-on-active-file').get('chunkSize') as number;
 
     // If chunkSize is 0 or -1, treat the whole file as a single chunk
     if (chunkSize <= 0) {

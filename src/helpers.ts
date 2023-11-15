@@ -42,7 +42,7 @@ export function isActiveFileCOrCpp(): boolean {
         // Get the language ID of the current file
         const languageId = activeEditor.document.languageId;
 
-        const extensionsString = vscode.workspace.getConfiguration('clang-tidy').get('extensions') as string;
+        const extensionsString = vscode.workspace.getConfiguration('clang-tidy-on-active-file').get('extensions') as string;
         const extensionsArray = extensionsString.split(' ');
 
         return extensionsArray.some(e => e === languageId);

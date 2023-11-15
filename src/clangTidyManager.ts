@@ -31,7 +31,7 @@ function runClangTidyOnChunk(chunkFilePath: string, configPath: string, optional
             createTempCompileCommands(workspaceDir);
             args = args.concat(`-p=${workspaceDir}/compile_commands.json`);
             tempCompileCommands = true;
-            if (vscode.workspace.getConfiguration('clang-tidy').get('displayInfoPopups', true)) {
+            if (vscode.workspace.getConfiguration('clang-tidy-on-active-file').get('displayInfoPopups', true)) {
                 vscode.window.showWarningMessage('Using a default compile_commands.json as ./build/compile_commands.json wasn\'t found.');
             }
         }
@@ -52,7 +52,7 @@ function runClangTidyOnChunk(chunkFilePath: string, configPath: string, optional
                 if (err) console.error(`Error deleting temporary file ${chunkFilePath}: ${err}`);
             });
             // console.log("clang-tidy exit code: " + code);
-            removeTempCompileCommands(workspaceDir);
+            if (removeTempCompileCommands) { removeTempCompileCommands(workspaceDir); }
             resolve(output); // resolve promise
         });
     });
@@ -102,14 +102,12 @@ async function performChunkAnalysis(chunkFilePaths: string[], configPath: string
 export async function startClangTidy(outputChannel: vscode.OutputChannel, diagnosticCollection: vscode.DiagnosticCollection, workspaceDir: string, filePath: string, configPath: string, optionalArgs: string) {
     console.time(`Clang Tidy Time Start`); // Start timer
 
-    vscode.window.setStatusBarMessage(`Clang Tidy (Running)`);
-
-    const maxCoresConfig = vscode.workspace.getConfiguration('clang-tidy').get('maxCores', -1);
+    const maxCoresConfig = vscode.workspace.getConfiguration('clang-tidy-on-active-file').get('maxCores', -1);
     const cpuCount = os.cpus().length;
     const maxConcurrentTasks = maxCoresConfig > 0 ? Math.min(maxCoresConfig, cpuCount) : Math.max(1, Math.floor(cpuCount / 2));
 
     try {
-        const chunkSize = vscode.workspace.getConfiguration('clang-tidy').get('chunkSize') as number;
+        const chunkSize = vscode.workspace.getConfiguration('clang-tidy-on-active-file').get('chunkSize') as number;
 
         const createdChunkFilePaths = await prepareAndCreateChunkFiles(filePath);
         chunkFilePaths = createdChunkFilePaths; // Update the global chunkFilePaths array
@@ -130,7 +128,6 @@ export async function startClangTidy(outputChannel: vscode.OutputChannel, diagno
             outputChannel.appendLine(`An unknown error occurred: ${JSON.stringify(error)}`);
         }
     } finally {
-        vscode.window.setStatusBarMessage(`Clang Tidy (Done)`);
         console.timeEnd(`Clang Tidy Time Start`); // End timer
     }
 }

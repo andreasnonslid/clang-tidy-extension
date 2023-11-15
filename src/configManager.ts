@@ -6,7 +6,7 @@ import {
 
 
 export function isValidConfiguration(configPath: string, filePath: string | undefined, workspaceDir: string | undefined): boolean {
-    const config = vscode.workspace.getConfiguration('clang-tidy');
+    const config = vscode.workspace.getConfiguration('clang-tidy-on-active-file');
     const displayInfoPopups = config.get('displayInfoPopups', true);
     const displayExtensionPopups = config.get('displayExtensionPopups', false);
     const chunkSize = config.get('chunkSize', -1);

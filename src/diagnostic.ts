@@ -1,10 +1,15 @@
 import * as vscode from 'vscode';
 
-
 export async function updateDiagnostics(diagnosticCollection: vscode.DiagnosticCollection, stdout: string, filePath: string, chunkSize: number) {
   const diagnostics = parseClangOutput(stdout, chunkSize);
   const textDocument = await vscode.workspace.openTextDocument(vscode.Uri.file(filePath));
   diagnosticCollection.set(textDocument.uri, diagnostics);
+}
+
+export function clearDiagnosticsForClosedFile(diagnosticCollection: vscode.DiagnosticCollection, textDocument: vscode.TextDocument): void {
+  if (textDocument.uri.scheme === 'file') {
+    diagnosticCollection.delete(textDocument.uri);
+  }
 }
 
 
