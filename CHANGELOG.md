@@ -21,3 +21,9 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Add usage of default compile_commands when none found in "./build/".
 - Make status bare msg more compact.
+
+## [1.3.0]
+
+- Make status bar usage better by adding item, making it compact (and a button).
+- Renaming the names to use the new extension name.
+- Make diagnostics on files which are closed disappear.

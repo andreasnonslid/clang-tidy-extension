@@ -41,21 +41,9 @@ Limited support for very large files: Files beyond a certain size may not be pro
 
 Dependency on project build configurations: The extension requires correct setup of build configurations for accurate analysis.
 
-##Release Notes
+## Release Notes
 
-### 1.0.0
-
-Initial release of clang-tidy extension.
-
-### 1.0.1
-
-Fixed issue with file path handling.
-Improved error messaging and configuration validation.
-
-### 1.1.0
-
-Added parallel processing support.
-Enhanced chunk-based file analysis.
+[Changelog](CHANGELOG.md)
 
 ## Following Extension Guidelines
 
