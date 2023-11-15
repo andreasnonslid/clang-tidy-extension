@@ -16,3 +16,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [1.1.2]
 
 - Add initial changelog.
+
+## [1.2.0]
+
+- Add usage of default compile_commands when none found in "./build/".
+- Make status bare msg more compact.

@@ -6,17 +6,36 @@ import {
     ChildProcess
 } from 'child_process';
 import { updateDiagnostics } from './diagnostic';
+import { checkFilePath } from './helpers';
 import {
     prepareAndCreateChunkFiles,
     deleteChunkFiles,
 } from './fileChunkManager';
+import {
+    createTempCompileCommands,
+    removeTempCompileCommands
+} from './fileUtils';
+
 
 let clangTidyProcesses: ChildProcess[] = [];
 let chunkFilePaths: string[] = [];
 
 function runClangTidyOnChunk(chunkFilePath: string, configPath: string, optionalArgs: string[], workspaceDir: string): Promise<string> {
     return new Promise((resolve, _) => {
-        const args = [chunkFilePath, `--config-file=${configPath}`, `-p=${workspaceDir}/build/compile_commands.json`].concat(optionalArgs);
+        var tempCompileCommands = false;
+        var args = [chunkFilePath, `--config-file=${configPath}`]
+        if (checkFilePath(workspaceDir + '/build/compile_commands.json')) {
+            args = args.concat(`-p=${workspaceDir}/build/compile_commands.json`);
+        }
+        else {
+            createTempCompileCommands(workspaceDir);
+            args = args.concat(`-p=${workspaceDir}/compile_commands.json`);
+            tempCompileCommands = true;
+            if (vscode.workspace.getConfiguration('clang-tidy').get('displayInfoPopups', true)) {
+                vscode.window.showWarningMessage('Using a default compile_commands.json as ./build/compile_commands.json wasn\'t found.');
+            }
+        }
+        args = args.concat(optionalArgs);
         const clangTidyProcess = spawn('clang-tidy', args, { cwd: workspaceDir });
         clangTidyProcesses.push(clangTidyProcess);  // Add the process to the array
 
@@ -33,6 +52,7 @@ function runClangTidyOnChunk(chunkFilePath: string, configPath: string, optional
                 if (err) console.error(`Error deleting temporary file ${chunkFilePath}: ${err}`);
             });
             // console.log("clang-tidy exit code: " + code);
+            removeTempCompileCommands(workspaceDir);
             resolve(output); // resolve promise
         });
     });
@@ -82,7 +102,7 @@ async function performChunkAnalysis(chunkFilePaths: string[], configPath: string
 export async function startClangTidy(outputChannel: vscode.OutputChannel, diagnosticCollection: vscode.DiagnosticCollection, workspaceDir: string, filePath: string, configPath: string, optionalArgs: string) {
     console.time(`Clang Tidy Time Start`); // Start timer
 
-    vscode.window.setStatusBarMessage(`Running Clang Tidy on ${filePath}`);
+    vscode.window.setStatusBarMessage(`Clang Tidy (Running)`);
 
     const maxCoresConfig = vscode.workspace.getConfiguration('clang-tidy').get('maxCores', -1);
     const cpuCount = os.cpus().length;
@@ -110,7 +130,7 @@ export async function startClangTidy(outputChannel: vscode.OutputChannel, diagno
             outputChannel.appendLine(`An unknown error occurred: ${JSON.stringify(error)}`);
         }
     } finally {
-        vscode.window.setStatusBarMessage(`Clang Tidy completed for ${filePath}`);
+        vscode.window.setStatusBarMessage(`Clang Tidy (Done)`);
         console.timeEnd(`Clang Tidy Time Start`); // End timer
     }
 }

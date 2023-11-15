@@ -17,6 +17,7 @@ function parseClangOutput(clangOutput: string, chunkSize: number): vscode.Diagno
   const lines = clangOutput.split('\n');
 
   for (let line of lines) {
+    console.log(line);
     const match = CLANG_WARNING_PATTERN.exec(line);
     if (match) {
       const [, filePathWithChunk, chunkIndexStr, lineStr, columnStr, message] = match;

@@ -1,3 +1,0 @@
-C:/dev/testing/clang-tidy/build/CMakeFiles/main.x.dir
-C:/dev/testing/clang-tidy/build/CMakeFiles/edit_cache.dir
-C:/dev/testing/clang-tidy/build/CMakeFiles/rebuild_cache.dir

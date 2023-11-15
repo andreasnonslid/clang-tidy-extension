@@ -6,7 +6,7 @@ export function checkFilePath(filePath: string): boolean {
     if (fs.existsSync(filePath)) {
         return true;
     } else {
-        vscode.window.showErrorMessage(`File not found: ${filePath}`);
+        vscode.window.showWarningMessage(`File not found: ${filePath}`);
         return false;
     }
 }
