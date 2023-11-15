@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/andreasnonslid/clang-tidy-extension"
   },
-  "version": "1.1.0",
+  "version": "1.1.2",
   "engines": {
     "vscode": "^1.63.0"
   },

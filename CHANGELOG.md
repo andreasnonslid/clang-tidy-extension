@@ -4,6 +4,15 @@ All notable changes to the "clang-tidy" extension will be documented in this fil
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [1.1.0]
 
-- Initial release
+- Initial release.
+- Use chunks to run clang-tidy.
+
+## [1.1.1]
+
+- Rename the extension to publish.
+
+## [1.1.2]
+
+- Add initial changelog.
