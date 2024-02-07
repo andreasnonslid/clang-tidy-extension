@@ -27,3 +27,11 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Make status bar usage better by adding item, making it compact (and a button).
 - Renaming the names to use the new extension name.
 - Make diagnostics on files which are closed disappear.
+
+## [2.0.0]
+
+- Change statusbar icon
+- Correct statusbar tooltip
+- Update the compile_commands stand-in to use C++20 instead of C++17
+- Add recursive search for compile_commands
+- Save chunk files in $HOME directory instead of cluttering the working directory, as default, but optional
