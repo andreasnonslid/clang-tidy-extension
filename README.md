@@ -34,6 +34,7 @@ This extension contributes the following settings:
     clang-tidy.displayInfoPopups: Toggle displaying information popups.
     clang-tidy.displayExtensionPopups: Toggle displaying popups for the active file extension check.
     clang-tidy.extensions: The file extensions that the extension should try running clang-tidy on, seperated by spaces.
+    clang-tidy.useHome: Use $HOME directory for the temp chunk files.
 
 ## Known Issues
 
